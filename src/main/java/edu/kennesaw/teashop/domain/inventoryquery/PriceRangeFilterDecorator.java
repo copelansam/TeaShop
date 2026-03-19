@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// Will filter out inventory items by whether their price falls between the user specified minimum and maximum prices
 public class PriceRangeFilterDecorator extends InventoryQueryDecoratorBase{
 
     private final BigDecimal minimumPrice;
