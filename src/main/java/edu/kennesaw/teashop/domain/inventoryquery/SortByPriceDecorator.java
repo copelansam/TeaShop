@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+// Sorts inventory items by price in the user specified direction
 public class SortByPriceDecorator extends InventoryQueryDecoratorBase {
 
     private final SortDirection direction;
