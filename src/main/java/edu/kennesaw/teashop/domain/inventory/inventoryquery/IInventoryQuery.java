@@ -1,10 +1,10 @@
-package edu.kennesaw.teashop.domain.inventory.queries;
+package edu.kennesaw.teashop.domain.inventory.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
 import java.util.List;
 
-public interface IItemQuery {
+public interface IInventoryQuery {
 
 
     // This function will retrieve items based on whatever criteria each concrete class defines

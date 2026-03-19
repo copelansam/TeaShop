@@ -1,15 +1,15 @@
-package edu.kennesaw.teashop.domain.inventory.queries;
+package edu.kennesaw.teashop.domain.inventory.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class MaxPriceFilter extends QueryDecorator{
+public class MaxPriceFilter extends InventoryQueryDecoratorBase {
 
     private BigDecimal maximumPrice;
 
-    public MaxPriceFilter(IItemQuery query, BigDecimal maximumPrice){
+    public MaxPriceFilter(IInventoryQuery query, BigDecimal maximumPrice){
         super(query);
         this.maximumPrice = maximumPrice;
     }

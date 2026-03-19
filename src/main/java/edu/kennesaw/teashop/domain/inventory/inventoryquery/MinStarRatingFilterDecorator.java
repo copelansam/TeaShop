@@ -1,14 +1,14 @@
-package edu.kennesaw.teashop.domain.inventory.queries;
+package edu.kennesaw.teashop.domain.inventory.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
 import java.util.List;
 
-public class MinStarFilter extends QueryDecorator{
+public class MinStarRatingFilterDecorator extends InventoryQueryDecoratorBase {
 
     private int starRating;
 
-    public MinStarFilter(IItemQuery query, int starRating){
+    public MinStarRatingFilterDecorator(IInventoryQuery query, int starRating){
         super(query);
         this.starRating = starRating;
     }

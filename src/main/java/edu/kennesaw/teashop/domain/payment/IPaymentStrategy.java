@@ -2,7 +2,7 @@ package edu.kennesaw.teashop.domain.payment;
 
 import java.math.BigDecimal;
 
-public interface PaymentStrategy {
+public interface IPaymentStrategy {
 
-    public void pay(BigDecimal amount);
+    public void pay();
 }

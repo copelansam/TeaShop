@@ -1,14 +1,14 @@
-package edu.kennesaw.teashop.domain.inventory.queries;
+package edu.kennesaw.teashop.domain.inventory.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
 import java.util.List;
 
-public class RatingSort extends QueryDecorator{
+public class SortByStarRatingDecorator extends InventoryQueryDecoratorBase {
 
     private boolean ascending;
 
-    public RatingSort(IItemQuery query, boolean ascending){
+    public SortByStarRatingDecorator(IInventoryQuery query, boolean ascending){
         super(query);
         this.ascending = ascending;
     }

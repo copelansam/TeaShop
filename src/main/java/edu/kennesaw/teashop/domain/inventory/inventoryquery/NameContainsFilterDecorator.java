@@ -1,14 +1,14 @@
-package edu.kennesaw.teashop.domain.inventory.queries;
+package edu.kennesaw.teashop.domain.inventory.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
 import java.util.List;
 
-public class NameFilter extends QueryDecorator{
+public class NameContainsFilterDecorator extends InventoryQueryDecoratorBase {
 
     private String name;
 
-    public NameFilter(IItemQuery query, String name){
+    public NameContainsFilterDecorator(IInventoryQuery query, String name){
         super(query);
         this.name = name;
     }

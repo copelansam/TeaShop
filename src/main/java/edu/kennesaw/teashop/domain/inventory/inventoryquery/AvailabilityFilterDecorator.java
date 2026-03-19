@@ -1,14 +1,14 @@
-package edu.kennesaw.teashop.domain.inventory.queries;
+package edu.kennesaw.teashop.domain.inventory.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
 import java.util.List;
 
-public class AvailabilityFilter extends QueryDecorator{
+public class AvailabilityFilterDecorator extends InventoryQueryDecoratorBase {
 
     private boolean avialable;
 
-    AvailabilityFilter(IItemQuery query, boolean available){
+    AvailabilityFilterDecorator(IInventoryQuery query, boolean available){
         super(query);
         this.avialable = available;
     }

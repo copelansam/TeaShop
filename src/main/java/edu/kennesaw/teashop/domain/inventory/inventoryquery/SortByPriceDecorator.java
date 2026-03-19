@@ -1,14 +1,14 @@
-package edu.kennesaw.teashop.domain.inventory.queries;
+package edu.kennesaw.teashop.domain.inventory.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
 import java.util.List;
 
-public class PriceSort extends QueryDecorator{
+public class SortByPriceDecorator extends InventoryQueryDecoratorBase {
 
     private boolean ascending;
 
-    public PriceSort(IItemQuery query, boolean ascending){
+    public SortByPriceDecorator(IInventoryQuery query, boolean ascending){
         super(query);
         this.ascending = ascending;
     }
