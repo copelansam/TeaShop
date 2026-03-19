@@ -4,6 +4,7 @@ import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AllInventoryQuery implements IInventoryQuery {
@@ -22,6 +23,6 @@ public class AllInventoryQuery implements IInventoryQuery {
         for (InventoryItem item : repository.getAllItems()){
             queriedItems.add(new QueriedInventoryItem(item));
         }
-        return queriedItems;
+        return Collections.unmodifiableList(queriedItems);
     }
 }
