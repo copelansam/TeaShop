@@ -52,6 +52,10 @@ public class InventoryItem{
         return availableQuantity;
     }
 
+    public void changeAvailableQuantity(int amount){
+        setAvailableQuantity(getAvailableQuantity() + amount);
+    }
+
     public void setStarRating(StarRating starRating) {
         this.starRating = starRating;
     }
@@ -59,4 +63,5 @@ public class InventoryItem{
     public StarRating getStarRating() {
         return starRating;
     }
+
 }
