@@ -8,5 +8,5 @@ public interface IInventoryQuery {
 
 
     // This function will retrieve items based on whatever criteria each concrete class defines
-    public List<InventoryItem> getItems();
+    public List<QueriedInventoryItem> getItems();
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class PaymentContext {
     private String paymentType;
+    private PaymentStrategyBase strategy;
     private BigDecimal amount;
 
     public PaymentContext(String paymentType, BigDecimal amount){

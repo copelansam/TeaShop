@@ -12,6 +12,10 @@ public class InventoryRepository {
         items = new ArrayList<>(InventoryDataSeeder.createSeedData());
     }
 
+    public List<InventoryItem> getAllItems(){
+        return items;
+    }
+
 
     public void updateQuantity(UUID uuid, int amount){
         InventoryItem changing = getItemById(uuid);
