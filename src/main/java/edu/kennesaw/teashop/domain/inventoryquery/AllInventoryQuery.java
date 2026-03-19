@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// Will return all inventory items, will then be decorated to filter out unwanted items
 public class AllInventoryQuery implements IInventoryQuery {
 
     private final InventoryRepository repository;

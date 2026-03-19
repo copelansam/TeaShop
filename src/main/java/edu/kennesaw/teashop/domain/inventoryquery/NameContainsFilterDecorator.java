@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+// Will filter out inventory items based on whether their name matches what the user inputs
 public class NameContainsFilterDecorator extends InventoryQueryDecoratorBase {
 
     private final String searchName;
