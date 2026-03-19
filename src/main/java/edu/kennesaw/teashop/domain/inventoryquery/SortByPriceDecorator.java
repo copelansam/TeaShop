@@ -1,4 +1,4 @@
-package edu.kennesaw.teashop.domain.inventory.inventoryquery;
+package edu.kennesaw.teashop.domain.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryItem;
 
