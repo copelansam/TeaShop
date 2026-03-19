@@ -1,4 +1,34 @@
 package edu.kennesaw.teashop.domain.inventoryquery;
 
-public class PriceRangeFilterDecorator {
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class PriceRangeFilterDecorator extends  InventoryQueryDecoratorBase{
+
+    private final BigDecimal minimumPrice;
+    private final BigDecimal maximumPrice;
+
+    public PriceRangeFilterDecorator(IInventoryQuery query, BigDecimal minimumPrice, BigDecimal maximumPrice){
+        super(query);
+        this.minimumPrice = minimumPrice;
+        this.maximumPrice = maximumPrice;
+    }
+
+    @Override
+    public List<QueriedInventoryItem> getItems(){
+
+        List<QueriedInventoryItem> filteredByPrice = new ArrayList<>();
+        List<QueriedInventoryItem> items = wrappedQuery.getItems();
+
+        for (QueriedInventoryItem item : items) {
+
+            if (item.getPrice().compareTo(minimumPrice) >= 0
+                    && item.getPrice().compareTo(maximumPrice) <= 0) {
+                filteredByPrice.add(item);
+            }
+        }
+        return Collections.unmodifiableList(filteredByPrice);
+    }
 }
