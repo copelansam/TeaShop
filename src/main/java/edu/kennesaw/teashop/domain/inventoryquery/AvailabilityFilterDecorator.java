@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// Will filter out the inventory object by whether they are or are not in stock as chosen by the user
+// Will filter out the inventory objects by whether they are or are not in stock as chosen by the user
 public class AvailabilityFilterDecorator extends InventoryQueryDecoratorBase {
 
     private final boolean available;

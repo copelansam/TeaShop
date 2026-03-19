@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PriceRangeFilterDecorator extends  InventoryQueryDecoratorBase{
+public class PriceRangeFilterDecorator extends InventoryQueryDecoratorBase{
 
     private final BigDecimal minimumPrice;
     private final BigDecimal maximumPrice;
