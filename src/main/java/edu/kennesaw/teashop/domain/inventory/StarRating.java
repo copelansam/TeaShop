@@ -22,17 +22,9 @@ public class StarRating {
         return this.rating;
     }
 
-    public String getRatingAsStars(){
-        StringBuilder ratingAsStars = new StringBuilder();
-        for (int i = 0; i < getRating(); i++){
-            ratingAsStars.append("*");
-        }
-        return  ratingAsStars.toString();
-    }
-
     @Override
     public String toString(){
-        return rating + "star(s)";
+        return rating + " star(s)";
     }
 
 }

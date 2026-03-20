@@ -6,7 +6,7 @@ public class PaymentStrategyFactory {
         switch (context.getPaymentType()){
 
             case "Credit Card":
-                return new CreditCardPayment(context.getAmount());
+                //return new CreditCardPayment(context.getAmount());
             case "Apple Wallet":
                 return new ApplePayPayment(context.getAmount());
             case "Crypto Wallet":

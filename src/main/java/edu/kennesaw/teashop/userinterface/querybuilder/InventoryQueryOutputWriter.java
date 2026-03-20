@@ -11,7 +11,7 @@ public class InventoryQueryOutputWriter {
         System.out.println("======== Query Results ===========\n");
 
         // Filters applied
-        System.out.println("\nThese are the filters that were applied:");
+        System.out.println("These are the filters that were applied:\n");
 
         // Name filter
         if (!querySession.getNameFilter().isEmpty()){ // If the user specified a name filter, show it, otherwise don't show this line
@@ -27,10 +27,10 @@ public class InventoryQueryOutputWriter {
         }
 
         // Price range filter
-        System.out.println("Filter: Price between $" + querySession.getMinPrice() + " and $" + queryOutput.getMaxPrice());
+        System.out.println("Filter: Price between $" + querySession.getMinPrice() + " and $" + querySession.getMaxPrice());
 
         // Star rating range filter
-        System.out.println("Filter: Star Rating between " + querySession.getMinRating().getRating() + " and " + queryOutput.getMaxRating().getRating());
+        System.out.println("Filter: Star Rating between " + querySession.getMinRating().getRating() + " and " + querySession.getMaxRating().getRating());
 
         // Price sort direction
         System.out.println("Sort: price (" + querySession.getPriceSortDirection().getDisplayName()+")");
@@ -41,10 +41,10 @@ public class InventoryQueryOutputWriter {
         // Results
 
         if (querySession.getQueriedItems().isEmpty()){ // If no items were found
-            System.out.println("No items found with the filters you applied.");
+            System.out.println("\nNo items found with the filters you applied.");
         }
         else{
-            System.out.println(querySession.getNumberOfItems() + " item(s) matched your query: ");
+            System.out.println("\n" + querySession.getNumberOfItems() + " item(s) matched your query: ");
             int counter = 1;
             for (QueriedInventoryItem item : querySession.getQueriedItems()){
 

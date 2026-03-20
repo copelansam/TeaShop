@@ -30,7 +30,7 @@ public class Application{
         // Let users select and purchase tea until they say to stop
         while (userChoice == 'Y') {
 
-            System.out.println("Complete the prompts to search our selection of fine teas\n");
+            System.out.println("\nComplete the prompts to search our selection of fine teas\n");
 
 
             // Build the query. Uses decorator chain to wrap it based on user choices
@@ -45,7 +45,11 @@ public class Application{
             // Send querySession to writer to be printed out
             outputWriter.writeOutputToScreen(querySession);
 
+            System.out.print("Go again? (Y/N): ");
+            userChoice = scan.nextLine().charAt(0);
 
         }
+
+        System.out.println("end of program");
     }
 }

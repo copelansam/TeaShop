@@ -228,7 +228,7 @@ public class InventoryQueryBuilder {
 
     public IInventoryQuery buildStarRatingSortQuery(IInventoryQuery query){
 
-        System.out.println("* Sort by Star rating (A/D, default D): ");
+        System.out.print("* Sort by Star rating (A/D, default D): ");
         String ratingSortInput = scan.nextLine().toUpperCase();
         SortDirection direction;
 
