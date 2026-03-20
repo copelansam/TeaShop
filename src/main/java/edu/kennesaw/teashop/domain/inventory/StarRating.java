@@ -4,7 +4,7 @@ public class StarRating {
 
     private int rating;
 
-    StarRating(int rating){
+    public StarRating(int rating){
 
         setRating(rating);
     }
