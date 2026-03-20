@@ -5,6 +5,7 @@ import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 import edu.kennesaw.teashop.domain.inventoryquery.SortDirection;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 public class InventoryQueryOutput {
@@ -41,7 +42,7 @@ public class InventoryQueryOutput {
     }
 
     public List<QueriedInventoryItem> getQueriedItems() {
-        return queriedItems;
+        return Collections.unmodifiableList(queriedItems);
     }
 
     public String getNameFilter(){
@@ -78,5 +79,9 @@ public class InventoryQueryOutput {
 
     public boolean isEmpty(){
         return queriedItems.isEmpty();
+    }
+
+    public int getNumberOfItems(){
+        return queriedItems.size();
     }
 }

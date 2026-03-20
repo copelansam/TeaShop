@@ -1,5 +1,7 @@
 package edu.kennesaw.teashop.userinterface.querybuilder;
 
+import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
+
 public class InventoryQueryOutputWriter {
 
     public void writeOutputToScreen(InventoryQueryOutput queryOutput){
@@ -23,7 +25,7 @@ public class InventoryQueryOutputWriter {
         }
 
         // Price range filter
-        System.out.println("Filter: Price between $" + queryOutput.getMinPrice().doubleValue() + " and $" + queryOutput.getMaxPrice().doubleValue());
+        System.out.println("Filter: Price between $" + queryOutput.getMinPrice() + " and $" + queryOutput.getMaxPrice());
 
         // Star rating range filter
         System.out.println("Filter: Star Rating between " + queryOutput.getMinRating().getRating() + " and " + queryOutput.getMaxRating().getRating());
@@ -32,9 +34,26 @@ public class InventoryQueryOutputWriter {
         System.out.println("Sort: price (" + queryOutput.getPriceSortDirection().getDisplayName()+")");
 
         // Rating sort direction
-        System.out.println("Sort rating (" + queryOutput.getRatingSortDirection().getDisplayName() + ")");
+        System.out.println("Sort: rating (" + queryOutput.getRatingSortDirection().getDisplayName() + ")");
 
+        // Results
 
+        if (queryOutput.getQueriedItems().isEmpty()){ // If no items were found
+            System.out.println("No items found with the filters you applied.");
+        }
+        else{
+            System.out.println(queryOutput.getNumberOfItems() + " item(s) matched your query: ");
+            int counter = 1;
+            for (QueriedInventoryItem item : queryOutput.getQueriedItems()){
 
+                System.out.println(counter + ". Name: " +item.getName()
+                        + "   $" + item.getPrice().toPlainString()
+                        + "  Qty: " + item.getAvailableQuantity()
+                        + (item.getAvailableQuantity() == 0 ? " (Out of Stock)" : "") // If the item is out of stock, print a message saying so
+                        + " " + item.getStarRating());
+
+                counter++;
+            }
+        }
     }
 }

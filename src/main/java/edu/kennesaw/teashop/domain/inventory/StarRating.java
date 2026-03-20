@@ -30,4 +30,9 @@ public class StarRating {
         return  ratingAsStars.toString();
     }
 
+    @Override
+    public String toString(){
+        return rating + "star(s)";
+    }
+
 }

@@ -5,6 +5,7 @@ import edu.kennesaw.teashop.domain.inventoryquery.*;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class InventoryQueryBuilder {
@@ -83,7 +84,7 @@ public class InventoryQueryBuilder {
             }
             else {
                 try { // Try to convert the user input to a valid money value, if you can't, catch the error and tell the use rot try again.
-                    minimumPriceSearch = new BigDecimal(minimumPriceInput);
+                    minimumPriceSearch = new BigDecimal(minimumPriceInput).setScale(2, RoundingMode.HALF_UP);
 
                     if (minimumPriceSearch.doubleValue() < 0) {
                         System.out.println("Price has to be greater than or equal to $0. Try again.");
@@ -107,7 +108,7 @@ public class InventoryQueryBuilder {
             else{
                 try{
 
-                    maximumPriceSearch = new BigDecimal(maximumPriceInput);
+                    maximumPriceSearch = new BigDecimal(maximumPriceInput).setScale(2, RoundingMode.HALF_UP);;
 
                     if (minimumPriceSearch.compareTo(maximumPriceSearch) > 0){
                         System.out.println("You entered a maximum that is less than the minimum. Enter a maximum value greater than the minimum.");
