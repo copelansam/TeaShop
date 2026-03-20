@@ -51,8 +51,9 @@ public class InventoryQueryBuilder {
             query = new NameContainsFilterDecorator(query,nameSearch);
         }
 
-        // Store what the input to recall later
+        // Store user input to be recalled later into session object
         this.nameFilter = nameSearch;
+
         return query;
     }
 
@@ -60,19 +61,21 @@ public class InventoryQueryBuilder {
 
         System.out.print("* Is available? (Y/N, default Y): ");
         String availableSearchInput = scan.nextLine().toUpperCase();
+
+        // Set variable to default value: true/ in stock
         boolean availability = true;
 
         if (availableSearchInput.isEmpty()){ // If the user inputs nothing, use the default: in stock items
-            availability = true;
+            // Only here to handle empty strings, otherwise an exception would be thrown.
         }
         else if (availableSearchInput.charAt(0) == 'N'){ // If the user says no, then search for out of stock items
             availability = false;
         }
-        else{ // Otherwise use the default: in stock items
-            availability = true;
-        }
 
+        // Store user input to be recalled later into session object
         this.availabilityFilter = availability;
+
+        // Wrap query & return
         query = new AvailabilityFilterDecorator(query, availability);
         return query;
     }
@@ -129,12 +132,12 @@ public class InventoryQueryBuilder {
             }
         }
 
-        query = new PriceRangeFilterDecorator(query, minimumPriceSearch, maximumPriceSearch);
-
-        // Store what the user input to recall later
+        // Store user input to be recalled later into session object
         this.minPrice = minimumPriceSearch;
         this.maxPrice = maximumPriceSearch;
 
+        // Wrap query & return
+        query = new PriceRangeFilterDecorator(query, minimumPriceSearch, maximumPriceSearch);
         return query;
     }
 
@@ -190,12 +193,12 @@ public class InventoryQueryBuilder {
             }
         }
 
-        query = new StarRatingRangeFilterDecorator(query, minimumRatingSearch, maximumRatingSearch);
-
-        // Store what the user input to recall later.
+        // Store user input to be recalled later into session object
         this.minRating = minimumRatingSearch;
         this.maxRating = maximumRatingSearch;
 
+        // Wrap query & return
+        query = new StarRatingRangeFilterDecorator(query, minimumRatingSearch, maximumRatingSearch);
         return query;
     }
 
@@ -215,10 +218,10 @@ public class InventoryQueryBuilder {
             direction = SortDirection.ASCENDING;
         }
 
-        // Store user input for later
+        // Store user input to be recalled later into session object
         this.priceSort = direction;
 
-        // Wrap query
+        // Wrap query & return
         query = new SortByPriceDecorator(query, direction);
         return query;
     }
@@ -239,10 +242,11 @@ public class InventoryQueryBuilder {
             direction = SortDirection.DESCENDING;
         }
 
-        query = new SortByStarRatingDecorator(query, direction);
-
+        // Store user input to be recalled later into session object
         this.ratingSort = direction;
 
+        // Wrap query & return
+        query = new SortByStarRatingDecorator(query, direction);
         return query;
     }
 }
