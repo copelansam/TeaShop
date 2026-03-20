@@ -4,7 +4,7 @@ import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 
 public class InventoryQueryOutputWriter {
 
-    public void writeOutputToScreen(InventorySearchSession queryOutput){
+    public void writeOutputToScreen(InventorySearchSession querySession){
 
 
 
@@ -14,12 +14,12 @@ public class InventoryQueryOutputWriter {
         System.out.println("\nThese are the filters that were applied:");
 
         // Name filter
-        if (!queryOutput.getNameFilter().isEmpty()){ // If the user specified a name filter, show it, otherwise don't show this line
-            System.out.println("Filter: Name contains: " + queryOutput.getNameFilter());
+        if (!querySession.getNameFilter().isEmpty()){ // If the user specified a name filter, show it, otherwise don't show this line
+            System.out.println("Filter: Name contains: " + querySession.getNameFilter());
         }
 
         // Availability filter
-        if (queryOutput.getAvailableFilter()){
+        if (querySession.getAvailableFilter()){
             System.out.println("Filter: In Stock (Quantity > 0)");
         }
         else{
@@ -27,26 +27,26 @@ public class InventoryQueryOutputWriter {
         }
 
         // Price range filter
-        System.out.println("Filter: Price between $" + queryOutput.getMinPrice() + " and $" + queryOutput.getMaxPrice());
+        System.out.println("Filter: Price between $" + querySession.getMinPrice() + " and $" + queryOutput.getMaxPrice());
 
         // Star rating range filter
-        System.out.println("Filter: Star Rating between " + queryOutput.getMinRating().getRating() + " and " + queryOutput.getMaxRating().getRating());
+        System.out.println("Filter: Star Rating between " + querySession.getMinRating().getRating() + " and " + queryOutput.getMaxRating().getRating());
 
         // Price sort direction
-        System.out.println("Sort: price (" + queryOutput.getPriceSortDirection().getDisplayName()+")");
+        System.out.println("Sort: price (" + querySession.getPriceSortDirection().getDisplayName()+")");
 
         // Rating sort direction
-        System.out.println("Sort: rating (" + queryOutput.getRatingSortDirection().getDisplayName() + ")");
+        System.out.println("Sort: rating (" + querySession.getRatingSortDirection().getDisplayName() + ")");
 
         // Results
 
-        if (queryOutput.getQueriedItems().isEmpty()){ // If no items were found
+        if (querySession.getQueriedItems().isEmpty()){ // If no items were found
             System.out.println("No items found with the filters you applied.");
         }
         else{
-            System.out.println(queryOutput.getNumberOfItems() + " item(s) matched your query: ");
+            System.out.println(querySession.getNumberOfItems() + " item(s) matched your query: ");
             int counter = 1;
-            for (QueriedInventoryItem item : queryOutput.getQueriedItems()){
+            for (QueriedInventoryItem item : querySession.getQueriedItems()){
 
                 System.out.println(counter + ". Name: " +item.getName()
                         + "   $" + item.getPrice().toPlainString()
