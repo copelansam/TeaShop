@@ -48,7 +48,7 @@ public class InventoryQueryOutput {
         return nameFilter;
     }
 
-    public boolean isAvailabilityFilter() {
+    public boolean getAvailableFilter() {
         return availabilityFilter;
     }
 
