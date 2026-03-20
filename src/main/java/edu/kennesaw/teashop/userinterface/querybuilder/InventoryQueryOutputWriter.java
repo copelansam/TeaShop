@@ -4,7 +4,9 @@ import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 
 public class InventoryQueryOutputWriter {
 
-    public void writeOutputToScreen(InventoryQueryOutput queryOutput){
+    public void writeOutputToScreen(InventorySearchSession queryOutput){
+
+
 
         System.out.println("======== Query Results ===========\n");
 

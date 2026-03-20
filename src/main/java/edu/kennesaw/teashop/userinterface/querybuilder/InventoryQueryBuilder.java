@@ -1,5 +1,6 @@
 package edu.kennesaw.teashop.userinterface.querybuilder;
 
+import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
 import edu.kennesaw.teashop.domain.inventory.StarRating;
 import edu.kennesaw.teashop.domain.inventoryquery.*;
 import edu.kennesaw.teashop.util.ScannerSingleton;
@@ -19,10 +20,15 @@ public class InventoryQueryBuilder {
     private StarRating maxRating;
     private SortDirection priceSort;
     private SortDirection ratingSort;
+    private final InventoryRepository repository;
 
-    public IInventoryQuery build(AllInventoryQuery baseQuery){
+    public InventoryQueryBuilder(InventoryRepository repository){
+        this.repository = repository;
+    }
 
-        IInventoryQuery query = baseQuery;
+    public InventorySearchSession build(){
+
+        IInventoryQuery query = new AllInventoryQuery(repository);
 
         query = buildNameQuery(query);
         query = buildAvailabilityQuery(query);
@@ -32,7 +38,7 @@ public class InventoryQueryBuilder {
         query = buildStarRatingSortQuery(query);
 
 
-        return query;
+        return new InventorySearchSession(query,nameFilter,availabilityFilter,minPrice,maxPrice,minRating,maxRating,priceSort,ratingSort);
     }
 
     public IInventoryQuery buildNameQuery(IInventoryQuery query){

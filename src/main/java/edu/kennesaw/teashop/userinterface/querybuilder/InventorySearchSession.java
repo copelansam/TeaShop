@@ -1,6 +1,7 @@
 package edu.kennesaw.teashop.userinterface.querybuilder;
 
 import edu.kennesaw.teashop.domain.inventory.StarRating;
+import edu.kennesaw.teashop.domain.inventoryquery.IInventoryQuery;
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 import edu.kennesaw.teashop.domain.inventoryquery.SortDirection;
 
@@ -8,9 +9,12 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
-public class InventoryQueryOutput {
+// This class will serve as a DTO that will store the query that a user creates, the items that the query returns,
+// and the choices that the user made to create the query. Will be used by the query builder and writer
+public class InventorySearchSession {
 
-    private final List<QueriedInventoryItem> queriedItems;
+    private List<QueriedInventoryItem> queriedItems;
+    private final IInventoryQuery query;
     private final String nameFilter;
     private final boolean availabilityFilter;
     private final BigDecimal minPrice;
@@ -20,17 +24,19 @@ public class InventoryQueryOutput {
     private final SortDirection priceSortDirection;
     private final SortDirection ratingSortDirection;
 
-    public InventoryQueryOutput(List<QueriedInventoryItem> queriedItems,
-                                String nameFilter,
-                                boolean availabilityFilter,
-                                BigDecimal minPrice,
-                                BigDecimal maxPrice,
-                                StarRating minRating,
-                                StarRating maxRating,
-                                SortDirection priceSortDirection,
-                                SortDirection ratingSortDirection){
+    // When the object is first created, the query will not have been run yet. Once the query is run we can use a setter to set the list of items
+    public InventorySearchSession(IInventoryQuery query,
+                                  String nameFilter,
+                                  boolean availabilityFilter,
+                                  BigDecimal minPrice,
+                                  BigDecimal maxPrice,
+                                  StarRating minRating,
+                                  StarRating maxRating,
+                                  SortDirection priceSortDirection,
+                                  SortDirection ratingSortDirection){
 
-        this.queriedItems = queriedItems;
+        this.queriedItems = null;
+        this.query = query;
         this.nameFilter = nameFilter;
         this.availabilityFilter = availabilityFilter;
         this.minPrice = minPrice;
@@ -41,8 +47,16 @@ public class InventoryQueryOutput {
         this.ratingSortDirection = ratingSortDirection;
     }
 
+    public void setQueriedItems(List<QueriedInventoryItem> queriedItems){
+        this.queriedItems = queriedItems;
+    }
+
     public List<QueriedInventoryItem> getQueriedItems() {
         return Collections.unmodifiableList(queriedItems);
+    }
+
+    public IInventoryQuery getQuery(){
+        return query;
     }
 
     public String getNameFilter(){
