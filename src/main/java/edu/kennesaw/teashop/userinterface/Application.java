@@ -14,10 +14,12 @@ public class Application{
     private final Scanner scan = ScannerSingleton.getInstance();
     private final InventoryQueryBuilder queryBuilder;
     private final InventoryQueryOutputWriter outputWriter;
+    private final Checkout checkout;
 
     public Application(InventoryQueryBuilder queryBuilder, InventoryQueryOutputWriter outputWriter){
         this.queryBuilder = queryBuilder;
         this.outputWriter = outputWriter;
+        checkout = new Checkout();
     }
 
 
@@ -44,6 +46,8 @@ public class Application{
 
             // Send querySession to writer to be printed out
             outputWriter.writeOutputToScreen(querySession);
+
+            checkout.startPurchase(items);
 
             System.out.print("Go again? (Y/N): ");
             userChoice = scan.nextLine().charAt(0);
