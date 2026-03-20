@@ -8,7 +8,7 @@ public class InventoryQueryOutputWriter {
 
 
 
-        System.out.println("======== Query Results ===========\n");
+        System.out.println("\n======== Query Results ===========\n");
 
         // Filters applied
         System.out.println("These are the filters that were applied:\n");
@@ -56,6 +56,7 @@ public class InventoryQueryOutputWriter {
 
                 counter++;
             }
+            System.out.println();
         }
     }
 }

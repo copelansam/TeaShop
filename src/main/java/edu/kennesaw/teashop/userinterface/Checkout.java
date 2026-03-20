@@ -67,7 +67,7 @@ public class Checkout {
 
     public int promptForQuantity(QueriedInventoryItem item){
 
-        System.out.print("Quantity for \"" + item.getName() + "\" + (1- " + item.getAvailableQuantity() + ")");
+        System.out.print("Quantity for \"" + item.getName() + "\" (1- " + item.getAvailableQuantity() + "): ");
         int quantityToBuy = scan.nextInt();
 
         return quantityToBuy;
@@ -81,6 +81,7 @@ public class Checkout {
         int counter = 1;
         for (PaymentOption option : paymentOptions){
             System.out.println(counter + ". " + option.getDisplayString());
+            counter++;
         }
 
         int paymentSelection;
@@ -98,6 +99,7 @@ public class Checkout {
                     continue;
                 }
 
+                scan.nextLine();
                 break;
             }
             catch(Exception e){ // Handle cases where the user does not put in a number
@@ -105,6 +107,7 @@ public class Checkout {
             }
         }
 
+        System.out.println("You chose: " + paymentOptions.get(paymentSelection - 1).getDisplayString());
         return paymentOptions.get(paymentSelection - 1); // Subtract 1 because lists are 0 indexed
     }
 

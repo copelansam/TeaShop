@@ -5,11 +5,11 @@ public class PaymentStrategyFactory {
 
         switch (context.getPaymentType()){
 
-            case "Credit Card":
+            case PaymentOption.CREDITCARD:
                 //return new CreditCardPayment(context.getAmount());
-            case "Apple Wallet":
+            case PaymentOption.APPLEPAY:
                 return new ApplePayPayment(context.getAmount());
-            case "Crypto Wallet":
+            case PaymentOption.CRYPTOCURRENCY:
                 return new CryptoWalletPayment(context.getAmount());
             default:
                 throw new IllegalStateException("No payment type selected!");
