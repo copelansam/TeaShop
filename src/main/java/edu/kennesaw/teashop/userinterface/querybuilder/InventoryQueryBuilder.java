@@ -9,7 +9,15 @@ import java.util.Scanner;
 
 public class InventoryQueryBuilder {
 
-    Scanner scan = ScannerSingleton.getInstance();
+    private final Scanner scan = ScannerSingleton.getInstance();
+    private String nameFilter;
+    private boolean availabilityFilter;
+    private BigDecimal minPrice;
+    private BigDecimal maxPrice;
+    private StarRating minRating;
+    private StarRating maxRating;
+    private SortDirection priceSort;
+    private SortDirection ratingSort;
 
     public IInventoryQuery build(AllInventoryQuery baseQuery){
 
@@ -31,10 +39,13 @@ public class InventoryQueryBuilder {
         System.out.print("* Tea name contains (leave blank for all names): ");
         String nameSearch = scan.nextLine();
 
-        if (!nameSearch.isEmpty()){
+        if (!nameSearch.isEmpty()){ // if the user input something, wrap the query with that term,
+            // otherwise don't wrap the query to keep all names.
             query = new NameContainsFilterDecorator(query,nameSearch);
         }
 
+        // Store what the input to recall later
+        this.nameFilter = nameSearch;
         return query;
     }
 
@@ -42,17 +53,20 @@ public class InventoryQueryBuilder {
 
         System.out.print("* Is available? (Y/N, default Y): ");
         String availableSearchInput = scan.nextLine().toUpperCase();
+        boolean availability = true;
 
         if (availableSearchInput.isEmpty()){ // If the user inputs nothing, use the default: in stock items
-            query = new AvailabilityFilterDecorator(query, true);
+            availability = true;
         }
         else if (availableSearchInput.charAt(0) == 'N'){ // If the user says no, then search for out of stock items
-            query = new AvailabilityFilterDecorator(query,false);
+            availability = false;
         }
         else{ // Otherwise use the default: in stock items
-            query = new AvailabilityFilterDecorator(query, true);
+            availability = true;
         }
 
+        this.availabilityFilter = availability;
+        query = new AvailabilityFilterDecorator(query, availability);
         return query;
     }
 
@@ -96,7 +110,7 @@ public class InventoryQueryBuilder {
                     maximumPriceSearch = new BigDecimal(maximumPriceInput);
 
                     if (minimumPriceSearch.compareTo(maximumPriceSearch) > 0){
-                        System.out.println("You enter a maximum that is less than the minimum. Enter a maximum value greater than the minimum.");
+                        System.out.println("You entered a maximum that is less than the minimum. Enter a maximum value greater than the minimum.");
                         maximumPriceSearch = null;
                     }
 
@@ -109,6 +123,11 @@ public class InventoryQueryBuilder {
         }
 
         query = new PriceRangeFilterDecorator(query, minimumPriceSearch, maximumPriceSearch);
+
+        // Store what the user input to recall later
+        this.minPrice = minimumPriceSearch;
+        this.maxPrice = maximumPriceSearch;
+
         return query;
     }
 
@@ -166,6 +185,10 @@ public class InventoryQueryBuilder {
 
         query = new StarRatingRangeFilterDecorator(query, minimumRatingSearch, maximumRatingSearch);
 
+        // Store what the user input to recall later.
+        this.minRating = minimumRatingSearch;
+        this.maxRating = maximumRatingSearch;
+
         return query;
     }
 
@@ -173,18 +196,23 @@ public class InventoryQueryBuilder {
 
         System.out.print("* Sort by Price (A/D, default A): ");
         String priceSortInput = scan.nextLine().toUpperCase();
+        SortDirection direction;
 
         if (priceSortInput.isEmpty()){ // If the user inputs nothing, due the default: ascending
-            query = new SortByPriceDecorator(query, SortDirection.ASCENDING);
-
+            direction = SortDirection.ASCENDING;
         }
         else if (priceSortInput.charAt(0) == 'D'){ // If the user inputs that they want descending, make the query descending
-            query = new SortByPriceDecorator(query, SortDirection.DESCENDING);
+            direction = SortDirection.DESCENDING;
         }
         else{ // Otherwise use the default value: Ascending
-            query = new SortByPriceDecorator(query, SortDirection.ASCENDING);
+            direction = SortDirection.ASCENDING;
         }
 
+        // Store user input for later
+        this.priceSort = direction;
+
+        // Wrap query
+        query = new SortByPriceDecorator(query, direction);
         return query;
     }
 
@@ -192,16 +220,21 @@ public class InventoryQueryBuilder {
 
         System.out.println("* Sort by Star rating (A/D, default D): ");
         String ratingSortInput = scan.nextLine().toUpperCase();
+        SortDirection direction;
+
 
         if (ratingSortInput.isEmpty()){ // If the user inputs nothing, use the default: descending.
-            query = new SortByStarRatingDecorator(query, SortDirection.DESCENDING);
+            direction = SortDirection.DESCENDING;
         }
         else if (ratingSortInput.charAt(0) == 'A') { // otherwise, if the user explicitly states that they want ascending, use ascending.
-
-            query = new SortByStarRatingDecorator(query, SortDirection.ASCENDING);
+            direction = SortDirection.ASCENDING;
         } else { // If the user does not explicitly want ascending, use the default: descending.
-            query = new SortByStarRatingDecorator(query, SortDirection.DESCENDING);
+            direction = SortDirection.DESCENDING;
         }
+
+        query = new SortByStarRatingDecorator(query, direction);
+
+        this.ratingSort = direction;
 
         return query;
     }
