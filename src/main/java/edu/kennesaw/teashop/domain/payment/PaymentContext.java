@@ -4,12 +4,13 @@ import java.math.BigDecimal;
 
 public class PaymentContext {
     private PaymentOption paymentType;
-    private PaymentStrategyBase strategy;
     private BigDecimal amount;
+    private int quantityToPurchase;
 
-    public PaymentContext(PaymentOption paymentType, BigDecimal amount){
+    public PaymentContext(PaymentOption paymentType, BigDecimal amount, int quantityToPurchase){
         setPaymentType(paymentType);
         setAmount(amount);
+        setQuantityToPurchase(quantityToPurchase);
     }
 
     public PaymentOption getPaymentType(){
@@ -32,5 +33,13 @@ public class PaymentContext {
         else {
             this.amount = amount;
         }
+    }
+
+    public int getQuantityToPurchase() {
+        return quantityToPurchase;
+    }
+
+    public void setQuantityToPurchase(int quantityToPurchase) {
+        this.quantityToPurchase = quantityToPurchase;
     }
 }

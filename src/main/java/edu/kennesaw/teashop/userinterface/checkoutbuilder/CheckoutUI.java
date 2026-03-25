@@ -18,7 +18,7 @@ public class CheckoutUI {
         while (true) {
 
             try {
-                System.out.print("Purchase an item? Enter item number 1-" + items.size()
+                System.out.print("Purchase an item? Enter a number between  1 and " + items.size()
                         + " to purchase an item or press 0 to skip checkout and continue (default): ");
                 userPurchase = scan.nextInt();
                 scan.nextLine();

@@ -1,5 +1,7 @@
 package edu.kennesaw.teashop.domain.payment;
 
+import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
+
 import java.math.BigDecimal;
 import java.time.YearMonth;
 
@@ -11,8 +13,8 @@ public class CreditCardPayment extends PaymentStrategyBase {
     private YearMonth expiration;
 
 
-    public CreditCardPayment(BigDecimal amount, String cardName, String cardNumber, String securityCode, YearMonth expiration){
-        super(amount);
+    public CreditCardPayment(BigDecimal amount,int quantityToPurchase, String cardName, String cardNumber, String securityCode, YearMonth expiration){
+        super(amount , quantityToPurchase);
         setCardName(cardName);
         setCardNumber(cardNumber);
         setSecurityCode(securityCode);
@@ -53,7 +55,8 @@ public class CreditCardPayment extends PaymentStrategyBase {
 
 
     @Override
-    public void pay() {
-        // code to implement paying with a credit card
+    public void pay(QueriedInventoryItem item) {
+       System.out.println("*** Purchase complete. Your" +  quantityToPurchase + " " + item.getName() + " packages " +
+               "for $" + amount.toPlainString() + " using the card with number " + getCardNumber() + "is on the way ***");
     }
 }

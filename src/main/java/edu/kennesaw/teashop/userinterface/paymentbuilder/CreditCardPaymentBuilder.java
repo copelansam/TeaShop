@@ -1,7 +1,10 @@
 package edu.kennesaw.teashop.userinterface.paymentbuilder;
 
+import edu.kennesaw.teashop.domain.payment.CreditCardPayment;
+import edu.kennesaw.teashop.domain.payment.PaymentStrategyBase;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
+import java.math.BigDecimal;
 import java.time.YearMonth;
 import java.util.Scanner;
 
@@ -45,6 +48,7 @@ public class CreditCardPaymentBuilder implements IPaymentBuilder{
     public void setExpiration(int year, int month) {
         this.expiration = YearMonth.of(year, month);
     }
+
 
     @Override
     public void collectInfo(){
@@ -97,5 +101,10 @@ public class CreditCardPaymentBuilder implements IPaymentBuilder{
 
         }
         setExpiration(expirationYear,expirationMonth);
+    }
+
+    public PaymentStrategyBase buildPayment(BigDecimal amount, int quantityToPurchase){
+
+        return new CreditCardPayment(amount, quantityToPurchase, cardName, cardNumber, securityCode, expiration);
     }
 }

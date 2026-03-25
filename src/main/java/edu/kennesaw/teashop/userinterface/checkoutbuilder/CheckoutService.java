@@ -2,8 +2,10 @@ package edu.kennesaw.teashop.userinterface.checkoutbuilder;
 
 import edu.kennesaw.teashop.domain.checkout.PricingService;
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
+import edu.kennesaw.teashop.domain.payment.IPaymentStrategy;
 import edu.kennesaw.teashop.domain.payment.PaymentContext;
 import edu.kennesaw.teashop.domain.payment.PaymentOption;
+import edu.kennesaw.teashop.domain.payment.PaymentStrategyFactory;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
 import java.math.BigDecimal;
@@ -14,10 +16,12 @@ public class CheckoutService {
 
     private CheckoutUI checkoutUi;
     private PricingService pricingService;
+    private PaymentStrategyFactory paymentStrategyFactory;
 
     public CheckoutService(){
         checkoutUi = new CheckoutUI();
         pricingService = new PricingService();
+        paymentStrategyFactory = new PaymentStrategyFactory();
     }
 
     private final Scanner scan = ScannerSingleton.getInstance();
@@ -43,8 +47,9 @@ public class CheckoutService {
         // Store user's choices to determine which payment type to use when paying
         PaymentContext paymentContext = new PaymentContext(paymentOption, amount);
 
-
-
+        // Create a payment strategy based on the users input and relevant context (total, quantity) then execute its pay method
+        IPaymentStrategy paymentStrategy = paymentStrategyFactory.createStrategy(paymentContext);
+        paymentStrategy.pay();
     }
 
 }

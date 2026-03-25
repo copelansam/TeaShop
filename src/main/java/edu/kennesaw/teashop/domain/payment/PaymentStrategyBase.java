@@ -5,18 +5,10 @@ import java.math.BigDecimal;
 public abstract class PaymentStrategyBase implements IPaymentStrategy {
 
     protected final BigDecimal amount;
+    protected final int quantityToPurchase;
 
-    public PaymentStrategyBase(BigDecimal amount){
-        if (amount.doubleValue() <= 0){
-            throw  new IllegalArgumentException("The amount ot charge must be greater than 0");
-        }
-        else if (amount == null){
-            throw new NullPointerException("Amount cannot be null");
-        }
-        else {
-            this.amount = amount;
-        }
+    public PaymentStrategyBase(BigDecimal amount, int quantityToPurchase){
+        this.amount = amount;
+        this.quantityToPurchase = quantityToPurchase;
     }
-
-
 }
