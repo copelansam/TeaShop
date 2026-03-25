@@ -1,8 +1,11 @@
 package edu.kennesaw.teashop.userinterface.paymentbuilder;
 
 import edu.kennesaw.teashop.domain.payment.CryptoType;
+import edu.kennesaw.teashop.domain.payment.CryptoWalletPayment;
+import edu.kennesaw.teashop.domain.payment.PaymentStrategyBase;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
@@ -87,5 +90,11 @@ public class CryptoCurrencyPaymentBuilder implements IPaymentBuilder{
         }
 
         setCryptoType(cryptoOptions.get(userChoice - 1)); // subtract 1 from index to account for 0 indexed collection
+    }
+
+    public PaymentStrategyBase buildPayment(BigDecimal amount, int quantityToPurchase){
+
+        return new CryptoWalletPayment(amount, quantityToPurchase, walletOwnerName, walletAddress, cryptoType);
+
     }
 }
