@@ -77,12 +77,14 @@ public class CryptoCurrencyPaymentBuilder implements IPaymentBuilder{
                 if (userChoice < 1 || userChoice > cryptoOptions.size()) {
                     throw new IndexOutOfBoundsException();
                 }
+                else{
+                    break;
+                }
 
             } catch (Exception e) {
                 System.out.println("Please enter a number between 1 and " + cryptoOptions.size());
             }
         }
-
 
         setCryptoType(cryptoOptions.get(userChoice - 1)); // subtract 1 from index to account for 0 indexed collection
     }
