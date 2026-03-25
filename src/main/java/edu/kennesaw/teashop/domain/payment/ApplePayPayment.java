@@ -6,10 +6,19 @@ import java.math.BigDecimal;
 
 public class ApplePayPayment extends PaymentStrategyBase {
 
-    public ApplePayPayment(BigDecimal amount, int quantityToPurchase){
+    private String walletOwnerName;
+    private String deviceId;
+    private String applePayToken;
+
+    public ApplePayPayment(BigDecimal amount, int quantityToPurchase, String walletOwnerName, String deviceId, String applePayToken){
         super(amount, quantityToPurchase);
+        this.walletOwnerName = walletOwnerName;
+        this.deviceId = deviceId;
+        this.applePayToken = applePayToken;
     }
 
     public void pay(QueriedInventoryItem item){
-            System.out.println("*** Purchase complete. Your" +  quantityToPurchase + " " + item.getName() + " packages for $" + amount.toPlainString() + "is on the way ***");    }
+            System.out.println("*** Purchase complete. Your " +  quantityToPurchase + " " + item.getName() + " " +
+                    "packages for $" + amount.toPlainString() + " with the wallet belonging to " + walletOwnerName + "is on the way ***");
+    }
 }

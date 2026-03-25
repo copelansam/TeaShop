@@ -47,10 +47,24 @@ public class CheckoutUI {
     }
 
     public int promptForQuantityToPurchase(QueriedInventoryItem item){
-        System.out.print("Quantity for \"" + item.getName() + "\" (1- " + item.getAvailableQuantity() + "): ");
-        int quantityToBuy = scan.nextInt();
 
-        return quantityToBuy;
+        while (true) {
+
+            try {
+
+                System.out.print("Quantity for \"" + item.getName() + "\" (1 - " + item.getAvailableQuantity() + "): ");
+                int quantityToBuy = scan.nextInt();
+
+                if (quantityToBuy < 1 || quantityToBuy > item.getAvailableQuantity()){
+                    throw new Exception();
+                }
+
+                return quantityToBuy;
+            }
+            catch(Exception e){
+                System.out.println("Enter a number between 1 and " + item.getAvailableQuantity());
+            }
+        }
     }
 
     public PaymentOption promptForPaymentOption(){
@@ -77,6 +91,7 @@ public class CheckoutUI {
                 if (paymentSelection < 0 || paymentSelection >=paymentOptions.size()){
                     // If the user doesn't put a value between the range of payment options, tell them to try again
                     System.out.println("Please enter a number between 1 and " + paymentOptions.size() + " to select a payment option");
+                    scan.nextLine();
                     continue;
                 }
 
@@ -85,6 +100,7 @@ public class CheckoutUI {
             }
             catch(Exception e){ // Handle cases where the user does not put in a number
                 System.out.println("Please enter a number between 1 and " + paymentOptions.size() + " to select a payment option");
+                scan.nextLine();
             }
         }
 

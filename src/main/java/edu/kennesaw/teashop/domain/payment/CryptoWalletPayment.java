@@ -18,7 +18,7 @@ public class CryptoWalletPayment extends PaymentStrategyBase {
 
     @Override
     public void pay(QueriedInventoryItem item) {
-        System.out.println("*** Purchase complete. Your" +  quantityToPurchase + " " + item.getName() + " packages " +
+        System.out.println("*** Purchase complete. Your " +  quantityToPurchase + " " + item.getName() + " packages " +
                 "for $" + amount.toPlainString() + " using crypto type " + cryptoType.getDisplayName() + " is on the way ***");
     }
 }

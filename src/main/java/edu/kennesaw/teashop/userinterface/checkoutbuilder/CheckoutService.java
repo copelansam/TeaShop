@@ -45,11 +45,11 @@ public class CheckoutService {
         PaymentOption paymentOption = checkoutUi.promptForPaymentOption();
 
         // Store user's choices to determine which payment type to use when paying
-        PaymentContext paymentContext = new PaymentContext(paymentOption, amount);
+        PaymentContext paymentContext = new PaymentContext(paymentOption, amount, quantityToPurchase);
 
         // Create a payment strategy based on the users input and relevant context (total, quantity) then execute its pay method
         IPaymentStrategy paymentStrategy = paymentStrategyFactory.createStrategy(paymentContext);
-        paymentStrategy.pay();
+        paymentStrategy.pay(itemToPurchase);
     }
 
 }

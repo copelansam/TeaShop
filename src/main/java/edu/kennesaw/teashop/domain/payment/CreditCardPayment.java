@@ -56,7 +56,7 @@ public class CreditCardPayment extends PaymentStrategyBase {
 
     @Override
     public void pay(QueriedInventoryItem item) {
-       System.out.println("*** Purchase complete. Your" +  quantityToPurchase + " " + item.getName() + " packages " +
+       System.out.println("*** Purchase complete. Your " +  quantityToPurchase + " " + item.getName() + " packages " +
                "for $" + amount.toPlainString() + " using the card with number " + getCardNumber() + " is on the way ***");
     }
 }

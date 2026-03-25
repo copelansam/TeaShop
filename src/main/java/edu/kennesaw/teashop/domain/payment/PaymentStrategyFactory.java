@@ -1,6 +1,8 @@
 package edu.kennesaw.teashop.domain.payment;
 
+import edu.kennesaw.teashop.userinterface.paymentbuilder.ApplePayPaymentBuilder;
 import edu.kennesaw.teashop.userinterface.paymentbuilder.CreditCardPaymentBuilder;
+import edu.kennesaw.teashop.userinterface.paymentbuilder.CryptoCurrencyPaymentBuilder;
 import edu.kennesaw.teashop.userinterface.paymentbuilder.IPaymentBuilder;
 
 public class PaymentStrategyFactory {
@@ -12,16 +14,23 @@ public class PaymentStrategyFactory {
         switch (context.getPaymentType()){
 
             case PaymentOption.CREDITCARD:
-                //return new CreditCardPayment(context.getAmount());
+
                 paymentBuilder = new CreditCardPaymentBuilder();
-                paymentBuilder.buildPayment(context.getAmount(), context.getQuantityToPurchase());
-                System.out.println("You selected credit card");
+                paymentBuilder.collectInfo();
+                return paymentBuilder.buildPayment(context.getAmount(), context.getQuantityToPurchase());
+
             case PaymentOption.APPLEPAY:
-                //return new ApplePayPayment(context.getAmount());
-                System.out.println("You selected apple pay");
+
+                paymentBuilder = new ApplePayPaymentBuilder();
+                paymentBuilder.collectInfo();
+                return paymentBuilder.buildPayment(context.getAmount(), context.getQuantityToPurchase());
+
             case PaymentOption.CRYPTOCURRENCY:
-                //return new CryptoWalletPayment(context.getAmount());
-                System.out.println("You selected crypto currency");
+
+                paymentBuilder = new CryptoCurrencyPaymentBuilder();
+                paymentBuilder.collectInfo();
+                return paymentBuilder.buildPayment(context.getAmount(), context.getQuantityToPurchase());
+
             default:
                 throw new IllegalStateException("No payment type selected!");
         }
