@@ -39,3 +39,9 @@ There are 2 main ways to run this application:
     * Build the application by running `mvn clean package`
     * Run the application with `java -jar target/tea-shop-1.0-SNAPSHOT.jar`
     * The program will open itself in your CLI where you can now play around with it
+
+A screenshot of the query function:
+![query screenshot](QueryScreenshot.png)
+
+A screenshot of the checkout feature:
+![checkout screenshot](CheckoutScreenshot.png)
