@@ -21,6 +21,14 @@ This project is meant to demonstrate the following concepts in Object Oriented D
 There are 2 main ways to run this application:
 
 * Docker:
+  * What You'll Need:
+    * Docker
+  * Instructions to Build & Run the Application:
+    * Clone the repository using `git clone https://github.com/copelansam/TeaShop`
+    * Navigate to the root directory of the repository
+    * Ensure you have docker running
+    * Build the Docker image from the CLI using `docker build -t tea-shop-app:latest .`
+    * Run the application with `docker run -it tea-shop-app .`
 * Console Line:
   * What You'll Need: 
     * Java version 23 or higher
