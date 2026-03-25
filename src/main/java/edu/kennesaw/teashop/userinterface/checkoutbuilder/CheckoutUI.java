@@ -19,7 +19,7 @@ public class CheckoutUI {
 
             try {
                 System.out.print("Purchase an item? Enter a number between  1 and " + items.size()
-                        + " to purchase an item or press 0 to skip checkout and continue (default): ");
+                        + " to select an item or press 0 to skip checkout and continue (default): ");
                 userPurchase = scan.nextInt();
                 scan.nextLine();
 
@@ -30,7 +30,7 @@ public class CheckoutUI {
                 }
                 else if (userPurchase == 0){ // If the user doesn't want to purchase anything,
                     // then skip the checkout process and return to the application flow
-                    return 0;
+                    return -1;
                 }
 
                 break;

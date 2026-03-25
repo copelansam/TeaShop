@@ -17,6 +17,7 @@ public class InventoryRepository {
     }
 
 
+    // Leaving the logic open to support the ability to add or subtract the amount available
     public void updateQuantity(UUID uuid, int amount){
         InventoryItem changing = getItemById(uuid);
 

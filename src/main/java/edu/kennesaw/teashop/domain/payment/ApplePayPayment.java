@@ -19,6 +19,6 @@ public class ApplePayPayment extends PaymentStrategyBase {
 
     public void pay(QueriedInventoryItem item){
             System.out.println("*** Purchase complete. Your " +  quantityToPurchase + " " + item.getName() + " " +
-                    "packages for $" + amount.toPlainString() + " with the wallet belonging to " + walletOwnerName + "is on the way ***");
+                    "packages for $" + amount.toPlainString() + " with the wallet belonging to " + walletOwnerName + " is on the way ***");
     }
 }

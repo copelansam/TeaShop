@@ -1,7 +1,9 @@
 package edu.kennesaw.teashop.userinterface;
 
+import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
+import edu.kennesaw.teashop.domain.inventory.InventoryService;
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
-import edu.kennesaw.teashop.userinterface.checkoutbuilder.CheckoutService;
+import edu.kennesaw.teashop.domain.checkout.CheckoutService;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryBuilder;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventorySearchSession;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryOutputWriter;
@@ -13,14 +15,16 @@ import java.util.Scanner;
 public class Application{
 
     private final Scanner scan = ScannerSingleton.getInstance();
+    private final InventoryService inventoryService;
     private final InventoryQueryBuilder queryBuilder;
     private final InventoryQueryOutputWriter outputWriter;
     private final CheckoutService checkout;
 
-    public Application(InventoryQueryBuilder queryBuilder, InventoryQueryOutputWriter outputWriter){
+    public Application(InventoryQueryBuilder queryBuilder, InventoryQueryOutputWriter outputWriter, InventoryService inventoryService){
         this.queryBuilder = queryBuilder;
         this.outputWriter = outputWriter;
-        checkout = new CheckoutService();
+        this.inventoryService = inventoryService;
+        checkout = new CheckoutService(inventoryService);
     }
 
 
@@ -56,6 +60,6 @@ public class Application{
 
         }
 
-        System.out.println("end of program");
+        System.out.println("End of Program. Thanks for Playing");
     }
 }

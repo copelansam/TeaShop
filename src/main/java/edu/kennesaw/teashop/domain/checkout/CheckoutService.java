@@ -1,11 +1,13 @@
-package edu.kennesaw.teashop.userinterface.checkoutbuilder;
+package edu.kennesaw.teashop.domain.checkout;
 
-import edu.kennesaw.teashop.domain.checkout.PricingService;
+import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
+import edu.kennesaw.teashop.domain.inventory.InventoryService;
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 import edu.kennesaw.teashop.domain.payment.IPaymentStrategy;
 import edu.kennesaw.teashop.domain.payment.PaymentContext;
 import edu.kennesaw.teashop.domain.payment.PaymentOption;
 import edu.kennesaw.teashop.domain.payment.PaymentStrategyFactory;
+import edu.kennesaw.teashop.userinterface.checkoutbuilder.CheckoutUI;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
 import java.math.BigDecimal;
@@ -14,11 +16,13 @@ import java.util.Scanner;
 
 public class CheckoutService {
 
+    private InventoryService inventoryService;
     private CheckoutUI checkoutUi;
     private PricingService pricingService;
     private PaymentStrategyFactory paymentStrategyFactory;
 
-    public CheckoutService(){
+    public CheckoutService(InventoryService inventoryService){
+        this.inventoryService = inventoryService;
         checkoutUi = new CheckoutUI();
         pricingService = new PricingService();
         paymentStrategyFactory = new PaymentStrategyFactory();
@@ -31,7 +35,7 @@ public class CheckoutService {
 
         // User selects item they want to buy
         int itemToPurchaseIndex = checkoutUi.promptForItemToPurchase(items);
-        if (itemToPurchaseIndex == 0) return; // if the user doesn't want to purchase an item, skip the checkout process & return to application
+        if (itemToPurchaseIndex == -1) return; // if the user doesn't want to purchase an item, skip the checkout process & return to application
 
         // User selects quantity they want to buy
         QueriedInventoryItem itemToPurchase = items.get(itemToPurchaseIndex);
@@ -47,9 +51,11 @@ public class CheckoutService {
         // Store user's choices to determine which payment type to use when paying
         PaymentContext paymentContext = new PaymentContext(paymentOption, amount, quantityToPurchase);
 
-        // Create a payment strategy based on the users input and relevant context (total, quantity) then execute its pay method
+        // Create a payment strategy based on the users input and relevant context (total, quantity)
+        // then execute its pay method and update the quantity of the purchased item.
         IPaymentStrategy paymentStrategy = paymentStrategyFactory.createStrategy(paymentContext);
         paymentStrategy.pay(itemToPurchase);
+        inventoryService.updateQuantity(itemToPurchase.getUuid(), quantityToPurchase * -1);
     }
 
 }

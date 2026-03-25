@@ -84,7 +84,7 @@ public class CreditCardPaymentBuilder implements IPaymentBuilder{
         int expirationYear;
         while(true) {
 
-            System.out.print("Enter the expiration year of your credit card: ");
+            System.out.print("Enter the expiration year (4 digit year) of your credit card: ");
 
             try {
                 expirationYear = Integer.parseInt(scan.nextLine());

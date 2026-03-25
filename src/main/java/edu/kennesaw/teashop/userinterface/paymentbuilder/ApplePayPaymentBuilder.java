@@ -73,9 +73,9 @@ public class ApplePayPaymentBuilder implements IPaymentBuilder{
         }
     }
 
-    public PaymentStrategyBase buildPayment(BigDecimal amount, int quatityToPurchase){
+    public PaymentStrategyBase buildPayment(BigDecimal amount, int qualityToPurchase){
 
-        return new ApplePayPayment(amount, quatityToPurchase, walletOwnerName, deviceId, applePayToken);
+        return new ApplePayPayment(amount, qualityToPurchase, walletOwnerName, deviceId, applePayToken);
 
     }
 }
