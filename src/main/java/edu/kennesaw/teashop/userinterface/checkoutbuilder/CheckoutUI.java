@@ -1,38 +1,18 @@
-package edu.kennesaw.teashop.userinterface;
+package edu.kennesaw.teashop.userinterface.checkoutbuilder;
 
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 import edu.kennesaw.teashop.domain.payment.PaymentOption;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Checkout {
+public class CheckoutUI {
 
-    private final Scanner scan = ScannerSingleton.getInstance();
+    Scanner scan = ScannerSingleton.getInstance();
 
-    public void startPurchase(List<QueriedInventoryItem> items){
-
-        // User selects item they want to buy
-        int itemToPurchaseIndex = promptForItem(items);
-        if (itemToPurchaseIndex == 0) return; // if the user doesn't want to purchase an item, skip the checkout process & return to application
-
-        // User selects quantity they want to buy
-        QueriedInventoryItem itemToPurchase = items.get(itemToPurchaseIndex);
-        int quantityToPurchase = promptForQuantity(itemToPurchase);
-
-        BigDecimal amount = new BigDecimal(itemToPurchase.getPrice().doubleValue() * quantityToPurchase).setScale(2, RoundingMode.HALF_UP);
-        System.out.println("*** Total Price: $" + amount.toPlainString());
-
-        PaymentOption paymentOption = promptForPaymentOption();
-
-    }
-
-    public int promptForItem(List<QueriedInventoryItem> items){
-
+    public int promptForItemToPurchase(List<QueriedInventoryItem> items){
         int userPurchase;
 
         while (true) {
@@ -63,10 +43,10 @@ public class Checkout {
         }
 
         return (userPurchase - 1); // subtract 1 to make it ready for accessing 0 indexed collections
+
     }
 
-    public int promptForQuantity(QueriedInventoryItem item){
-
+    public int promptForQuantityToPurchase(QueriedInventoryItem item){
         System.out.print("Quantity for \"" + item.getName() + "\" (1- " + item.getAvailableQuantity() + "): ");
         int quantityToBuy = scan.nextInt();
 
@@ -74,6 +54,7 @@ public class Checkout {
     }
 
     public PaymentOption promptForPaymentOption(){
+
         System.out.println("*** Please select a payment option:");
 
         List<PaymentOption> paymentOptions = List.of(PaymentOption.values());
@@ -110,7 +91,4 @@ public class Checkout {
         System.out.println("You chose: " + paymentOptions.get(paymentSelection - 1).getDisplayString());
         return paymentOptions.get(paymentSelection - 1); // Subtract 1 because lists are 0 indexed
     }
-
-
-
 }

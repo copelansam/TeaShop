@@ -1,6 +1,7 @@
 package edu.kennesaw.teashop.userinterface;
 
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
+import edu.kennesaw.teashop.userinterface.checkoutbuilder.CheckoutService;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryBuilder;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventorySearchSession;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryOutputWriter;
@@ -14,12 +15,12 @@ public class Application{
     private final Scanner scan = ScannerSingleton.getInstance();
     private final InventoryQueryBuilder queryBuilder;
     private final InventoryQueryOutputWriter outputWriter;
-    private final Checkout checkout;
+    private final CheckoutService checkout;
 
     public Application(InventoryQueryBuilder queryBuilder, InventoryQueryOutputWriter outputWriter){
         this.queryBuilder = queryBuilder;
         this.outputWriter = outputWriter;
-        checkout = new Checkout();
+        checkout = new CheckoutService();
     }
 
 
@@ -47,6 +48,7 @@ public class Application{
             // Send querySession to writer to be printed out
             outputWriter.writeOutputToScreen(querySession);
 
+            // Begin the checkout process by having the user decide which items to purchase
             checkout.startPurchase(items);
 
             System.out.print("Go again? (Y/N): ");
