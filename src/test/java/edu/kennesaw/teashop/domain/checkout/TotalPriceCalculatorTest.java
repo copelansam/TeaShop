@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PricingServiceTest {
+public class TotalPriceCalculatorTest {
 
     TotalPriceCalculator testPricingService = new TotalPriceCalculator();
 
