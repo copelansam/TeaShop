@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PricingServiceTest {
 
-    PricingService testPricingService = new PricingService();
+    TotalPriceCalculator testPricingService = new TotalPriceCalculator();
 
     // Tests that the order total is properly calculated by multiplying the price by quantity
     @Test

@@ -1,6 +1,5 @@
 package edu.kennesaw.teashop.domain.checkout;
 
-import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
 import edu.kennesaw.teashop.domain.inventory.InventoryService;
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 import edu.kennesaw.teashop.domain.payment.IPaymentStrategy;
@@ -18,13 +17,13 @@ public class CheckoutService {
 
     private InventoryService inventoryService;
     private CheckoutUI checkoutUi;
-    private PricingService pricingService;
+    private TotalPriceCalculator totalPriceCalculator;
     private PaymentStrategyFactory paymentStrategyFactory;
 
     public CheckoutService(InventoryService inventoryService){
         this.inventoryService = inventoryService;
         checkoutUi = new CheckoutUI();
-        pricingService = new PricingService();
+        totalPriceCalculator = new TotalPriceCalculator();
         paymentStrategyFactory = new PaymentStrategyFactory();
     }
 
@@ -42,7 +41,7 @@ public class CheckoutService {
         int quantityToPurchase = checkoutUi.promptForQuantityToPurchase(itemToPurchase);
 
         // Calculates the total price
-        BigDecimal amount = pricingService.getOrderTotal(itemToPurchase,quantityToPurchase);
+        BigDecimal amount = totalPriceCalculator.getOrderTotal(itemToPurchase,quantityToPurchase);
         System.out.println("*** Total Price: $" + amount.toPlainString());
 
         // Prompts the user for a payment option
