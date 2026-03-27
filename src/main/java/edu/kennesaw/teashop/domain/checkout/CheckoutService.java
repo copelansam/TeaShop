@@ -7,11 +7,10 @@ import edu.kennesaw.teashop.domain.payment.PaymentContext;
 import edu.kennesaw.teashop.domain.payment.PaymentOption;
 import edu.kennesaw.teashop.domain.payment.PaymentStrategyFactory;
 import edu.kennesaw.teashop.userinterface.checkoutbuilder.CheckoutUI;
-import edu.kennesaw.teashop.util.ScannerSingleton;
+import edu.kennesaw.teashop.userinterface.paymentbuilder.IPaymentBuilder;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Scanner;
 
 public class CheckoutService {
 
@@ -26,8 +25,6 @@ public class CheckoutService {
         totalPriceCalculator = new TotalPriceCalculator();
         paymentStrategyFactory = new PaymentStrategyFactory();
     }
-
-    private final Scanner scan = ScannerSingleton.getInstance();
 
     // Orchestrates the checkout process by asking user what item, quantity, and payment option they want, then executes the payment process
     public void startPurchase(List<QueriedInventoryItem> items){
@@ -52,8 +49,12 @@ public class CheckoutService {
 
         // Create a payment strategy based on the users input and relevant context (total, quantity)
         // then execute its pay method and update the quantity of the purchased item.
-        IPaymentStrategy paymentStrategy = paymentStrategyFactory.createStrategy(paymentContext);
+        IPaymentBuilder paymentBuilder = paymentStrategyFactory.createPaymentBuilder(paymentContext.getPaymentType());
+        paymentBuilder.collectInfo();
+
+        IPaymentStrategy paymentStrategy = paymentBuilder.buildPayment(amount, quantityToPurchase);
         paymentStrategy.pay(itemToPurchase);
+
         inventoryService.updateQuantity(itemToPurchase.getUuid(), quantityToPurchase * -1);
     }
 
