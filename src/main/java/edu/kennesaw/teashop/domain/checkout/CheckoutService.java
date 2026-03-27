@@ -47,11 +47,12 @@ public class CheckoutService {
         // Store user's choices to determine which payment type to use when paying
         PaymentContext paymentContext = new PaymentContext(paymentOption, amount, quantityToPurchase);
 
-        // Create a payment strategy based on the users input and relevant context (total, quantity)
+        // Create a payment builder based on the users input and relevant context (total, quantity)
         // then execute its pay method and update the quantity of the purchased item.
         IPaymentBuilder paymentBuilder = paymentStrategyFactory.createPaymentBuilder(paymentContext.getPaymentType());
         paymentBuilder.collectInfo();
 
+        // Build a payment strategy based on the builder returned by the factory
         IPaymentStrategy paymentStrategy = paymentBuilder.buildPayment(amount, quantityToPurchase);
         paymentStrategy.pay(itemToPurchase);
 
