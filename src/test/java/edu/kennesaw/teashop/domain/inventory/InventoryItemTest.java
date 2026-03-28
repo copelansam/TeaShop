@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class InventoryTests {
+public class InventoryItemTest {
 
     // Tests that InventoryItems are properly initialized
     @Test
