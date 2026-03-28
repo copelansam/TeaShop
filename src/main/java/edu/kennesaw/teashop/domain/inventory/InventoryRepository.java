@@ -1,6 +1,7 @@
 package edu.kennesaw.teashop.domain.inventory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class InventoryRepository {
     }
 
     public List<InventoryItem> getAllItems(){
-        return items;
+        return Collections.unmodifiableList(items);
     }
 
 
@@ -35,5 +36,11 @@ public class InventoryRepository {
             }
         }
         return null;
+    }
+
+    // Allows for the addition of a new item. Will not be used in this application but would be useful if
+    // I wanted to expand the program to allow inventory creation.
+    public void createNewItem(InventoryItem item){
+        items.add(item);
     }
 }

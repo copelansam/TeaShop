@@ -1,7 +1,5 @@
 package edu.kennesaw.teashop.domain.inventory;
 
-import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
-
 import java.util.UUID;
 
 public class InventoryService {
@@ -14,5 +12,9 @@ public class InventoryService {
 
     public void updateQuantity(UUID uuid, int quantity){
         repository.updateQuantity(uuid, quantity);
+    }
+
+    public void addNewItem(InventoryItem item){
+        repository.createNewItem(item);
     }
 }
