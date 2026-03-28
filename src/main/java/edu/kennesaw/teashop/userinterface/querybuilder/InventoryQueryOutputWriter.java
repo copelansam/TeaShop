@@ -42,6 +42,7 @@ public class InventoryQueryOutputWriter {
 
         if (querySession.getQueriedItems().isEmpty()){ // If no items were found
             System.out.println("\nNo items found with the filters you applied.");
+            return;
         }
         else{
             System.out.println("\n" + querySession.getNumberOfItems() + " item(s) matched your query: ");

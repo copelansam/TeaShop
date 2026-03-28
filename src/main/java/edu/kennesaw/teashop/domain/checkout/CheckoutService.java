@@ -34,10 +34,13 @@ public class CheckoutService {
             System.out.println("Unfortunately none of the items that you have queried are in stock.");
             return;
         }
+        else if (items.size() == 0){
+            System.out.println("Unfortunately, your query did not return any items. There are no items for you to purchase");
+        }
 
         // User selects item they want to buy
         int itemToPurchaseIndex = checkoutUi.promptForItemToPurchase(items);
-        if (itemToPurchaseIndex == -1) return; // if the user doesn't want to purchase an item, skip the checkout process & return to application
+        if (itemToPurchaseIndex == - 1) return; // if the user doesn't want to purchase an item, skip the checkout process & return to application
 
         // User selects quantity they want to buy
         QueriedInventoryItem itemToPurchase = items.get(itemToPurchaseIndex);
