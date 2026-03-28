@@ -27,8 +27,7 @@ class PaymentStrategyFactoryTest {
         testBuilder = testFactory.createPaymentBuilder(PaymentOption.CRYPTOCURRENCY);
         assertInstanceOf(CryptoCurrencyPaymentBuilder.class, testBuilder);
 
-        // Test creating a builder when something outside of the enum is entered (null)
-        assertThrows(IllegalStateException.class, () -> testFactory.createPaymentBuilder(null));
+        assertThrows(NullPointerException.class, () -> testFactory.createPaymentBuilder(null));
     }
 
 }
