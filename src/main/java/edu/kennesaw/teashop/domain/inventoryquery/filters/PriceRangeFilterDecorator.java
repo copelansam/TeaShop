@@ -1,4 +1,8 @@
-package edu.kennesaw.teashop.domain.inventoryquery;
+package edu.kennesaw.teashop.domain.inventoryquery.filters;
+
+import edu.kennesaw.teashop.domain.inventoryquery.IInventoryQuery;
+import edu.kennesaw.teashop.domain.inventoryquery.InventoryQueryDecoratorBase;
+import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 // Will filter out inventory items by whether their price falls between the user specified minimum and maximum prices
-public class PriceRangeFilterDecorator extends InventoryQueryDecoratorBase{
+public class PriceRangeFilterDecorator extends InventoryQueryDecoratorBase {
 
     private final BigDecimal minimumPrice;
     private final BigDecimal maximumPrice;

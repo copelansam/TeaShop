@@ -3,6 +3,13 @@ package edu.kennesaw.teashop.userinterface.querybuilder;
 import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
 import edu.kennesaw.teashop.domain.inventory.StarRating;
 import edu.kennesaw.teashop.domain.inventoryquery.*;
+import edu.kennesaw.teashop.domain.inventoryquery.filters.AvailabilityFilterDecorator;
+import edu.kennesaw.teashop.domain.inventoryquery.filters.NameContainsFilterDecorator;
+import edu.kennesaw.teashop.domain.inventoryquery.filters.PriceRangeFilterDecorator;
+import edu.kennesaw.teashop.domain.inventoryquery.filters.StarRatingRangeFilterDecorator;
+import edu.kennesaw.teashop.domain.inventoryquery.sorts.SortByPriceDecorator;
+import edu.kennesaw.teashop.domain.inventoryquery.sorts.SortByStarRatingDecorator;
+import edu.kennesaw.teashop.domain.inventoryquery.sorts.SortDirection;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
 import java.math.BigDecimal;

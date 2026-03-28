@@ -1,6 +1,8 @@
-package edu.kennesaw.teashop.domain.inventoryquery;
+package edu.kennesaw.teashop.domain.inventoryquery.sorts;
 
-import edu.kennesaw.teashop.domain.inventory.InventoryItem;
+import edu.kennesaw.teashop.domain.inventoryquery.IInventoryQuery;
+import edu.kennesaw.teashop.domain.inventoryquery.InventoryQueryDecoratorBase;
+import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 
 import java.util.ArrayList;
 import java.util.Collections;

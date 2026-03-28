@@ -1,4 +1,4 @@
-package edu.kennesaw.teashop.domain.inventoryquery;
+package edu.kennesaw.teashop.domain.inventoryquery.sorts;
 
 // This enum will store the different sorting directions, to make selection easier
 public enum SortDirection {
