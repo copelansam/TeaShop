@@ -53,7 +53,13 @@ public class InventoryItem{
     }
 
     public void changeAvailableQuantity(int amount){
-        setAvailableQuantity(getAvailableQuantity() + amount);
+        // If the change results in the quantity going below 0, throw an exception. Quantity cannot be less than zero.
+        if (amount < 0 && getAvailableQuantity() + amount < 0){
+            throw new IllegalArgumentException("Quantity cannot be less than 0");
+        }
+        else {
+            setAvailableQuantity(getAvailableQuantity() + amount);
+        }
     }
 
     public void setStarRating(StarRating starRating) {

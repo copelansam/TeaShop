@@ -10,6 +10,7 @@ public class StarRating {
     }
 
     public void setRating(int rating) {
+        // Rating must be between 1 and 5, throw an exception if anything else is input
         if (rating <= 0 || rating >5){
             throw new IllegalArgumentException("Ratings must be between 1 and 5!");
         }
