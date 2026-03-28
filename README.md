@@ -1,8 +1,9 @@
 ### Introduction to the Tea Shop Assignment:
 ***
 
-This project was created as part of my Object-Oriented Development Class. The project is a simplified teashop 
-application that allows users to browse teas by selecting filters (in stock, name contains, price above/below, etc.)
+This project was created as part of my Object-Oriented Development Class. The project is a simplified teashop console
+application that allows users to browse teas by selecting filters (in stock, name contains, price above/below, etc.) and sorting directions. 
+The application allows users to make (fake/demo) purchases using a variety of payment methods (credit card, apple pay, crypto)
 
 ## Key Concepts
 ***
@@ -39,6 +40,12 @@ There are 2 main ways to run this application:
     * Build the application by running `mvn clean package`
     * Run the application with `java -jar target/tea-shop-1.0-SNAPSHOT.jar`
     * The program will open itself in your CLI where you can now play around with it
+
+## Unit Test Execution Instructions
+***
+This application has some unit tests that cover some of the core features using JUnit 5.
+
+To execute all tests, run `mvn test` from the root directory in your CLI.
 
 A screenshot of the query function:
 ![query screenshot](QueryScreenshot.png)
