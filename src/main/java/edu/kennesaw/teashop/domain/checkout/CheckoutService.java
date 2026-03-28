@@ -29,13 +29,15 @@ public class CheckoutService {
     // Orchestrates the checkout process by asking user what item, quantity, and payment option they want, then executes the payment process
     public void startPurchase(List<QueriedInventoryItem> items){
 
-        // If the user selected to display only out of stock items, then don't let them purchase anything
-        if (items.getFirst().getAvailableQuantity() == 0){
-            System.out.println("Unfortunately none of the items that you have queried are in stock.");
+        if (items.size() == 0){ // If the query did not return any items, return early, user cannot purchase anything
+            System.out.println("Unfortunately, your query did not return any items. There are no items for you to purchase");
             return;
         }
-        else if (items.size() == 0){
-            System.out.println("Unfortunately, your query did not return any items. There are no items for you to purchase");
+        else if (items.getFirst().getAvailableQuantity() == 0){
+            // If the user selected to display only out of stock items, then return early and don't let them purchase anything
+
+            System.out.println("Unfortunately none of the items that you have queried are in stock.");
+            return;
         }
 
         // User selects item they want to buy
