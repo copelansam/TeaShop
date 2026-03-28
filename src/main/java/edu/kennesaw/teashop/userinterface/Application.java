@@ -15,7 +15,6 @@ import java.util.Scanner;
 public class Application{
 
     private final Scanner scan = ScannerSingleton.getInstance();
-    private final InventoryService inventoryService;
     private final InventoryQueryBuilder queryBuilder;
     private final InventoryQueryOutputWriter outputWriter;
     private final CheckoutService checkout;
@@ -23,7 +22,6 @@ public class Application{
     public Application(InventoryQueryBuilder queryBuilder, InventoryQueryOutputWriter outputWriter, InventoryService inventoryService){
         this.queryBuilder = queryBuilder;
         this.outputWriter = outputWriter;
-        this.inventoryService = inventoryService;
         checkout = new CheckoutService(inventoryService);
     }
 

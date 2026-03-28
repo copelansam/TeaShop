@@ -29,6 +29,12 @@ public class CheckoutService {
     // Orchestrates the checkout process by asking user what item, quantity, and payment option they want, then executes the payment process
     public void startPurchase(List<QueriedInventoryItem> items){
 
+        // If the user selected to display only out of stock items, then don't let them purchase anything
+        if (items.getFirst().getAvailableQuantity() == 0){
+            System.out.println("Unfortunately none of the items that you have queried are in stock.");
+            return;
+        }
+
         // User selects item they want to buy
         int itemToPurchaseIndex = checkoutUi.promptForItemToPurchase(items);
         if (itemToPurchaseIndex == -1) return; // if the user doesn't want to purchase an item, skip the checkout process & return to application
