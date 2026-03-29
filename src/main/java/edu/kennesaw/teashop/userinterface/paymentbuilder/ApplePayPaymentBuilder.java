@@ -1,7 +1,5 @@
 package edu.kennesaw.teashop.userinterface.paymentbuilder;
 
-// I don't know what sort of fields would be necessary for a real ApplePay application, so I am just making it up.
-
 import edu.kennesaw.teashop.domain.payment.ApplePayPayment;
 import edu.kennesaw.teashop.domain.payment.PaymentStrategyBase;
 import edu.kennesaw.teashop.util.ScannerSingleton;
@@ -9,6 +7,7 @@ import edu.kennesaw.teashop.util.ScannerSingleton;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+// I don't know what sort of fields would be necessary for a real ApplePay application, so I am just making it up.
 public class ApplePayPaymentBuilder implements IPaymentBuilder{
 
     private String walletOwnerName;
@@ -73,9 +72,10 @@ public class ApplePayPaymentBuilder implements IPaymentBuilder{
         }
     }
 
-    public PaymentStrategyBase buildPayment(BigDecimal amount, int qualityToPurchase){
+    // Creates apple pay payment
+    public PaymentStrategyBase buildPayment(BigDecimal amount, int quantityToPurchase){
 
-        return new ApplePayPayment(amount, qualityToPurchase, walletOwnerName, deviceId, applePayToken);
+        return new ApplePayPayment(amount, quantityToPurchase, walletOwnerName, deviceId, applePayToken);
 
     }
 }

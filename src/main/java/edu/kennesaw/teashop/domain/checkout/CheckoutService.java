@@ -65,9 +65,19 @@ public class CheckoutService {
 
         // Build a payment strategy based on the builder returned by the factory
         IPaymentStrategy paymentStrategy = paymentBuilder.buildPayment(amount, quantityToPurchase);
+
+        // Execute the payment
         paymentStrategy.pay(itemToPurchase);
 
-        inventoryService.updateQuantity(itemToPurchase.getUuid(), quantityToPurchase * -1);
+        // Update the purchased item's available quantity
+        updateInventoryAfterPurchase(itemToPurchase, quantityToPurchase);
+
+    }
+
+    // Update the purchased item's available quantity
+    public void updateInventoryAfterPurchase(QueriedInventoryItem item, int quantity){
+        inventoryService.updateQuantity(item.getUuid(), quantity * -1); // Multiply by negative 1 to subtract inventory
+
     }
 
 }
