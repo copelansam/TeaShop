@@ -1,7 +1,11 @@
 package edu.kennesaw.teashop.domain.inventory;
 
+import edu.kennesaw.teashop.domain.inventoryquery.InventorySearchSession;
+import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryBuilder;
+
 import java.util.UUID;
 
+// This class will orchestrate actions related to the inventory including query building, updating available quantities, and adding new items
 public class InventoryService {
 
     private final InventoryRepository repository;

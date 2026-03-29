@@ -1,5 +1,6 @@
 package edu.kennesaw.teashop.userinterface.querybuilder;
 
+import edu.kennesaw.teashop.domain.inventoryquery.InventorySearchSession;
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 
 public class InventoryQueryOutputWriter {

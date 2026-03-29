@@ -2,8 +2,8 @@ package edu.kennesaw.teashop;
 
 import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
 import edu.kennesaw.teashop.domain.inventory.InventoryService;
+import edu.kennesaw.teashop.domain.inventoryquery.InventoryQueryService;
 import edu.kennesaw.teashop.userinterface.Application;
-import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryBuilder;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryOutputWriter;
 
 public class Main{
@@ -11,10 +11,10 @@ public class Main{
 
         InventoryRepository repository = new InventoryRepository();
         InventoryService inventoryService = new InventoryService(repository);
-        InventoryQueryBuilder queryBuilder = new InventoryQueryBuilder(repository);
+        InventoryQueryService queryService = new InventoryQueryService(repository);
         InventoryQueryOutputWriter outputWriter = new InventoryQueryOutputWriter();
 
-        Application application = new Application(queryBuilder, outputWriter, inventoryService);
+        Application application = new Application(outputWriter, inventoryService, queryService);
         application.run();
     }
 }

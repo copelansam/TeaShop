@@ -1,11 +1,10 @@
 package edu.kennesaw.teashop.userinterface;
 
-import edu.kennesaw.teashop.domain.inventory.InventoryRepository;
 import edu.kennesaw.teashop.domain.inventory.InventoryService;
+import edu.kennesaw.teashop.domain.inventoryquery.InventoryQueryService;
 import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 import edu.kennesaw.teashop.domain.checkout.CheckoutService;
-import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryBuilder;
-import edu.kennesaw.teashop.userinterface.querybuilder.InventorySearchSession;
+import edu.kennesaw.teashop.domain.inventoryquery.InventorySearchSession;
 import edu.kennesaw.teashop.userinterface.querybuilder.InventoryQueryOutputWriter;
 import edu.kennesaw.teashop.util.ScannerSingleton;
 
@@ -15,13 +14,15 @@ import java.util.Scanner;
 public class Application{
 
     private final Scanner scan = ScannerSingleton.getInstance();
-    private final InventoryQueryBuilder queryBuilder;
     private final InventoryQueryOutputWriter outputWriter;
     private final CheckoutService checkout;
+    private final InventoryService inventoryService;
+    private final InventoryQueryService queryService;
 
-    public Application(InventoryQueryBuilder queryBuilder, InventoryQueryOutputWriter outputWriter, InventoryService inventoryService){
-        this.queryBuilder = queryBuilder;
+    public Application(InventoryQueryOutputWriter outputWriter, InventoryService inventoryService, InventoryQueryService queryService){
+        this.inventoryService =inventoryService;
         this.outputWriter = outputWriter;
+        this.queryService = queryService;
         checkout = new CheckoutService(inventoryService);
     }
 
@@ -38,19 +39,16 @@ public class Application{
             System.out.println("\nComplete the prompts to search our selection of fine teas\n");
 
 
-            // Build the query. Uses decorator chain to wrap it based on user choices
-            InventorySearchSession querySession = queryBuilder.build();
+            // Builds the query and stores what choices the user makes
+            InventorySearchSession querySession = queryService.buildQuery();
 
             // Execute the queries and store the results
-            List<QueriedInventoryItem> items = querySession.getQuery().getItems();
+            List<QueriedInventoryItem> items = queryService.executeQuery(querySession);
 
-            // Store the items in the querySession
-            querySession.setQueriedItems(items);
-
-            // Send querySession to writer to be printed out
+            // Send querySession to writer to print out the filters and sorts applied and what items were found
             outputWriter.writeOutputToScreen(querySession);
 
-            // Begin the checkout process by having the user decide which items to purchase
+            // Begin the checkout process
             checkout.startPurchase(items);
 
             System.out.print("Go again? (Y/N): ");

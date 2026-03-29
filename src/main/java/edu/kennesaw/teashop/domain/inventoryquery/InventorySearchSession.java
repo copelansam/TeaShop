@@ -1,8 +1,6 @@
-package edu.kennesaw.teashop.userinterface.querybuilder;
+package edu.kennesaw.teashop.domain.inventoryquery;
 
 import edu.kennesaw.teashop.domain.inventory.StarRating;
-import edu.kennesaw.teashop.domain.inventoryquery.IInventoryQuery;
-import edu.kennesaw.teashop.domain.inventoryquery.QueriedInventoryItem;
 import edu.kennesaw.teashop.domain.inventoryquery.sorts.SortDirection;
 
 import java.math.BigDecimal;
